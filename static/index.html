@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <title>Page Title</title>
+        <!-- custom CSS -->
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <!-- <link rel="stylesheet" href="assets/css/dashboard.css"> -->
+        <!-- Jquery, Bootstrap, Angular css files-->
+        <link rel="stylesheet" href="assets/node_modules/bootstrap3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/node_modules/bootstrap3/dist/css/bootstrap-theme.min.css">
+        <!-- <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css"> -->
+        <link rel="stylesheet" href="assets/node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css"/>
+        <link rel="stylesheet" href="assets/node_modules/timepicker/jquery.timepicker.css">
+    </head>
+    <body>
+        <div class="container">
+            <div ng-view>
+                
+            </div>
+        </div>
+
+        <!-- Jquery, Bootstrap-->
+        <script src="assets/node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="assets/node_modules/bootstrap3/dist/js/bootstrap.js"></script>
+        <!-- Calendar -->
+        <script src="assets/node_modules/moment/min/moment.min.js"></script>
+        <script src="assets/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+        <script src="assets/node_modules/timepicker/jquery.timepicker.min.js"></script>
+        <script src="assets/node_modules/datepair.js/dist/datepair.min.js"></script>
+        <!-- Angular js files -->
+        <script src="assets/node_modules/angular/angular.min.js"></script>
+        <script src="assets/node_modules/angular/angular-route.min.js"></script>
+        <script src="assets/node_modules/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+
+        <!-- Prototypes -->
+        <script src="common/prototypes/utils.js"></script>
+        <script src="common/prototypes/Date.js"></script>
+        <script src="common/prototypes/Table.js"></script>
+        <script src="common/prototypes/Array.js"></script>
+        <script src="common/prototypes/Ticket.js"></script>
+        <script src="common/prototypes/Schedule.js"></script>
+        
+        <!-- Directives -->
+        <script src="common/directives/table.directive.js"></script>
+        <script src="common/directives/room.directive.js"></script>
+        <script src="common/directives/switch.directive.js"></script>
+        <script src="common/directives/calendar.directive.js"></script>  
+
+        <!-- Cores -->
+        <script src="core/app.js"></script>
+        <script src="core/indexController.js"></script>
+        
+        <!-- User -->
+        <script src="core/login/login.controller.js"></script>
+        <script src="core/login/AuthService.service.js"></script>
+            <!-- Room -->
+        <script src="core/room/room.controller.js"></script>
+        <script src="core/room/room.service.js"></script>
+            <!-- Switch -->
+        <script src="core/switch/switch.controller.js"></script>
+        <script src="core/switch/switch.service.js"></script>
+            <!-- Calendar -->
+        <script src="core/calendar/calendar.controller.js"></script>
+        <script src="core/calendar/calendar.service.js"></script>
+            <!-- Table -->
+        <script src="core/table/table.controller.js"></script>
+        <script src="core/table/table.service.js"></script>
+    </body>
+</html>

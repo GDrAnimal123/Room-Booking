@@ -1,0 +1,32 @@
+<table style="" class="table table-bordered table-responsive">
+    <thead>
+        <tr>
+            <td style="width: 50px;"></td>
+            <!-- one way bind for displaying dates -->
+            <th style="z-index: 10; position: relative;" class="flex-col info" ng-repeat="date in table_ctrl.readableDates">
+                {{::date.getDayName()}} {{::date.getDate()}}
+                <!-- <div style="z-index: -1;" id="circle"></div> -->
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="(r_index, row) in table_ctrl.table">
+                                <!-- one way bind for displaying hour -->
+            <th class="flex-row">{{::table_ctrl.hours[r_index]}}:00</th>
+            <td  style="margin: 0; padding: 0; " ng-repeat="(c_index, col) in row track by $index" >
+                <!-- td needs to be $watch if self.table changed -->
+                <div>
+                    <p class="flex-step" ng-click="table_ctrl.selectCell(r_index, c_index, 0);">&nbsp;</p>
+                    <p class="flex-step" ng-click="table_ctrl.selectCell(r_index, c_index, 1);">&nbsp;</p>
+                    <p class="flex-step" ng-click="table_ctrl.selectCell(r_index, c_index, 2);">&nbsp;</p>
+                    <p class="flex-step" ng-click="table_ctrl.selectCell(r_index, c_index, 3);">&nbsp;</p>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+
+    <span>{{::table_ctrl.renderBookedTickets()}}</span>
+    <span>{{::table_ctrl.showPresentTime()}}</span>
+</table>
+
+

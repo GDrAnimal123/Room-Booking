@@ -1,0 +1,5 @@
+<!-- Switch button -->
+<div class="btn-group" style="float: right">
+    <button ng-class="switch_ctrl.selectedVar == 'day' ? 'btn-info': ''" ng-click="switch_ctrl.selectedVar = 'day'; switch_ctrl.render()" rel="day" class="btn">Day</button>
+    <button ng-class="switch_ctrl.selectedVar == 'week' ? 'btn-info': ''" ng-click="switch_ctrl.selectedVar = 'week'; switch_ctrl.render()" rel="week" class="btn">Week</button>
+</div>

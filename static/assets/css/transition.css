@@ -1,0 +1,89 @@
+/* The starting CSS styles for the enter animation */
+.slide {
+  transition:0.5s linear all;
+  opacity:0;
+}
+
+/*.slide-in {
+    animation: slide-in 0.5s forwards;
+    -webkit-animation: slide-in 0.5s forwards;
+}
+
+.slide-out {
+    animation: slide-out 0.5s forwards;
+    -webkit-animation: slide-out 0.5s forwards;
+}*/
+
+@-webkit-keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fadeInLeft {
+  -webkit-animation-name: fadeInLeft;
+  animation-name: fadeInLeft;
+}
+
+/*@-webkit-keyframes shake {
+  0% {
+    -webkit-transform: translate(2px, 2px) rotate(20deg);
+  }
+  20% {
+    -webkit-transform: translate(-4px, -4px) rotate(-20deg);
+  }
+  40% {
+    -webkit-transform: translate(2px, 2px) rotate(20deg);
+  }
+  60% {
+    -webkit-transform: translate(-2px, 2px) rotate(-20deg);
+  }
+  80% {
+    -webkit-transform: translate(4px, -4px) rotate(20deg);
+  }
+  100% {
+    -webkit-transform: translate(-2px, 2px) rotate(-20deg);
+  }
+}*/
+
+@keyframes my_fade_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+@-webkit-keyframes my_fade_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+.shake {
+  /*-webkit-animation-name: shake;
+  -webkit-animation-duration: 0.6s;
+  -webkit-transform-origin: 50% 50%;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: linear;
+  animation-duration: 0.6;*/
+  animation: my_fade_animation 0.5s linear;
+  -webkit-animation: my_fade_animation 0.5s linear;
+}

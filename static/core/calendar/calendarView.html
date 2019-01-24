@@ -1,0 +1,19 @@
+<div class="flex-calendar">
+    <button id="back" class="btn btn-info" ng-click="calendar_ctrl.previous()">
+        <span class="glyphicon glyphicon-menu-left"></span>
+        Back
+    </button>
+    <button id="today" class="btn" ng-disabled="calendar_ctrl.isToday" ng-click="calendar_ctrl.today()">
+        Today
+    </button>
+    <button id="datepicker" class="input-group date btn" data-provide="datepicker" data-date-autoclose="True" data-date-today-highlight="True">
+        <span>
+            {{calendar_ctrl.date_display}}
+        </span>
+    </button>
+
+    <button ng-click="calendar_ctrl.next()" id="forth" class="btn btn-info">
+        <span class="glyphicon glyphicon-menu-right"></span>
+        Next
+    </button>
+</div>

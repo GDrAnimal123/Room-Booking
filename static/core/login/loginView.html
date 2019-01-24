@@ -1,0 +1,14 @@
+<div id="login-form" class="container">
+    <form class="form col-xs-8 col-sm-8 col-md-4 col-lg-4" name="form" ng-submit="login_ctrl.login()">
+        <h2 class="text-center form-signin-heading">Booking Facilities</h2>
+        <h4 class="text-center form-signin-heading">for Starwood's member</h4>
+        <br>
+        <input type="text" class="form-control" name="userID" ng-model="login_ctrl.loginForm.userID" required>
+        <input type="password" class="form-control"  name="password" ng-model="login_ctrl.loginForm.password" required>
+        <input type="submit" class="btn btn-lg btn-info btn-block" ng-disabled="login_ctrl.disabled">
+
+        <div ng-show="login_ctrl.error" class="alert alert-danger">{{login_ctrl.errorMessage}}</div>
+
+        <br>Login with your Starwood ID &amp; Password
+    </form>
+</div>

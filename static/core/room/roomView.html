@@ -1,0 +1,13 @@
+<!-- Room Dropdown -->
+<div class="dropdown">
+    <!-- <button type="button" class="btn btn-success" ng-click="room_ctrl.deleteTicket()">Delete</button> -->
+    <!-- Modal -->
+    <div modal-boxes></div>
+    <button id="room-dropdown" class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">{{room_ctrl.room}}
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+        <li ng-repeat="(index, room) in room_ctrl.ROOMS" ng-click="room_ctrl.room = room_ctrl.ROOMS[index]; room_ctrl.render()">
+            <a href="#">{{room}}</a>
+        </li>
+    </ul>
+</div>

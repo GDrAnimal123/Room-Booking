@@ -1,0 +1,119 @@
+body {
+  padding-top: 75px;
+}
+
+.navbar-default {
+    background-color: rgb(140, 81, 280);
+    border-color: rgb(140, 81, 280);
+}
+
+#login-form {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-row {
+  width: 65px;
+  height: 120px;
+  padding: 0px;
+
+  text-align: center;
+}
+
+.flex-col {
+  text-align: center;
+  /*width: 500px;*/
+}
+
+.flex-step {
+  margin: 0 auto;
+  height: 30px;
+}
+
+.flex-step:hover {
+  background-color: rgb(135, 206, 250);
+  opacity: 0.5;
+}
+
+.flex-calendar {
+  display: flex;
+}
+
+#circle {
+  position: absolute;
+  top: 28px;
+  left: 50px;
+  width: 35px;
+  height: 35px;
+  background: rgb(30,144,255);
+  border-radius: 50%;
+}
+
+.table {
+  table-layout: fixed;
+}
+
+.table tbody td  {
+  position: relative;
+  cursor: pointer;
+}
+
+.table td .present {
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  opacity: 1;
+  background-color: rgb(255,69,0);
+  z-index: 10;
+}
+
+/*#present-hover {
+  display: none;
+}
+
+.table td .present:hover #present-hover {
+  display: block;
+}*/
+
+.table td .overlay {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background-color: rgb(135, 206, 250); /*#428bca*/
+  opacity: 0.9;
+  z-index: 1;
+}
+
+.table td .decorator {
+  position: absolute;
+  width: 4px;
+  /*height: 100%;*/
+  background-color: #428bca;
+  z-index: 2;
+}
+
+.text {
+  color: black;
+  font-size: 15px;
+  padding-left: 10px;
+  padding-top: 2px;
+  text-align: left;
+}
+
+.fa-close {
+  cursor: pointer;
+}
+
+input[required].ng-pristine {
+  border-color: #e74c3c;
+}
+
+input.ng-invalid.ng-dirty {
+  border-color: #e74c3c;
+}
+
+input.ng-valid.ng-dirty {
+  border-color: #2ecc71;
+}
