@@ -5,7 +5,7 @@ Booking application using Flask and Angularjs
 This application helps user to book room with comfort with interactive interface
 
 ## Usage
-(Ensure that 
+(Ensure that: 
 - you have MySql Server installed or [XAMPP](https://www.apachefriends.org/index.html)
 - change MySQL infos in config.py to fits your MySQL settings)
 ### Clone this project
