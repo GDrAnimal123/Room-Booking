@@ -16,7 +16,7 @@ class UserSQL(object):
     def create_table():
         # Open database connection
         db = psycopg2.connect(host=HOST, user=USER,
-                              passwd=PASSWD, db=DATABASE, port=PORT)
+                              password=PASSWD, database=DATABASE, port=PORT)
 
         # prepare a cursor object using cursor() method
         cursor = db.cursor()
@@ -40,7 +40,7 @@ class UserSQL(object):
     def drop_table():
         # Open database connection
         db = psycopg2.connect(host=HOST, user=USER,
-                              passwd=PASSWD, db=DATABASE)
+                              password=PASSWD, database=DATABASE, port=PORT)
 
         # prepare a cursor object using cursor() method
         cursor = db.cursor()
@@ -54,7 +54,7 @@ class UserSQL(object):
     def selectAll():
         # Connect to database
         db = psycopg2.connect(host=HOST, user=USER,
-                              passwd=PASSWD, db=DATABASE)
+                              password=PASSWD, database=DATABASE, port=PORT)
         cursor = db.cursor()
 
         # SQL command
@@ -79,7 +79,7 @@ class UserSQL(object):
 
         # Connect to database
         db = psycopg2.connect(host=HOST, user=USER,
-                              passwd=PASSWD, db=DATABASE)
+                              password=PASSWD, database=DATABASE, port=PORT)
         cursor = db.cursor()
 
         # SQL command
@@ -109,7 +109,7 @@ class UserSQL(object):
 
         # Connect to database
         db = psycopg2.connect(host=HOST, user=USER,
-                              passwd=PASSWD, db=DATABASE)
+                              password=PASSWD, database=DATABASE, port=PORT)
         cursor = db.cursor()
 
         # SQL command
@@ -136,7 +136,7 @@ class UserSQL(object):
 
         # Connect to database
         db = psycopg2.connect(host=HOST, user=USER,
-                              passwd=PASSWD, db=DATABASE)
+                              password=PASSWD, database=DATABASE, port=PORT)
         cursor = db.cursor()
 
         # SQL command
@@ -161,7 +161,7 @@ class UserSQL(object):
         id = object.id
         # Connect to database
         db = psycopg2.connect(host=HOST, user=USER,
-                              passwd=PASSWD, db=DATABASE)
+                              password=PASSWD, database=DATABASE, port=PORT)
         cursor = db.cursor()
 
         sql = """DELETE FROM User
@@ -197,7 +197,7 @@ class TicketSQL(object):
     def create_table():
         # Open database connection
         db = psycopg2.connect(host=HOST, user=USER,
-                              passwd=PASSWD, db=DATABASE)
+                              password=PASSWD, database=DATABASE, port=PORT)
 
         # prepare a cursor object using cursor() method
         cursor = db.cursor()
@@ -225,7 +225,7 @@ class TicketSQL(object):
     def drop_table():
         # Open database connection
         db = psycopg2.connect(host=HOST, user=USER,
-                              passwd=PASSWD, db=DATABASE)
+                              password=PASSWD, database=DATABASE, port=PORT)
 
         # prepare a cursor object using cursor() method
         cursor = db.cursor()
@@ -239,7 +239,7 @@ class TicketSQL(object):
     def selectAll():
         # Connect to database
         db = psycopg2.connect(host=HOST, user=USER,
-                              passwd=PASSWD, db=DATABASE)
+                              password=PASSWD, database=DATABASE, port=PORT)
         cursor = db.cursor()
 
         # SQL command
@@ -263,7 +263,7 @@ class TicketSQL(object):
     def selectByRoomAndTimestamps(room, timestamps):
         # Connect to database
         db = psycopg2.connect(host=HOST, user=USER,
-                              passwd=PASSWD, db=DATABASE)
+                              password=PASSWD, database=DATABASE, port=PORT)
         cursor = db.cursor()
 
         # SQL command
@@ -292,7 +292,7 @@ class TicketSQL(object):
 
         # Connect to database
         db = psycopg2.connect(host=HOST, user=USER,
-                              passwd=PASSWD, db=DATABASE)
+                              password=PASSWD, database=DATABASE, port=PORT)
         cursor = db.cursor()
 
         # SQL command
@@ -318,8 +318,7 @@ class TicketSQL(object):
         id, title, description, start, end = object.id, object.title, object.description, object.start, object.end
 
         # Connect to database
-        db = psycopg2.connect(host=HOST, user=USER,
-                              passwd=PASSWD, db=DATABASE)
+        db = psycopg2.connect(host=HOST, user=USER, password=PASSWD, database=DATABASE, port=PORT)
         cursor = db.cursor()
 
         # SQL command
@@ -344,8 +343,7 @@ class TicketSQL(object):
         # userID, room, title, description, start, end, timestamp = object.userID, object.room, object.title, object.description, object.start, object.end, object.timestamp
         id = object.id
         # Connect to database
-        db = psycopg2.connect(host=HOST, user=USER,
-                              passwd=PASSWD, db=DATABASE)
+        db = psycopg2.connect(host=HOST, user=USER, password=PASSWD, database=DATABASE, port=PORT)
         cursor = db.cursor()
 
         sql = """DELETE FROM Ticket
@@ -368,8 +366,7 @@ class TicketSQL(object):
         id = object.id
 
         # Connect to database
-        db = psycopg2.connect(host=HOST, user=USER,
-                              passwd=PASSWD, db=DATABASE)
+        db = psycopg2.connect(host=HOST, user=USER, password=PASSWD, database=DATABASE, port=PORT)
         cursor = db.cursor()
 
         # SQL command
