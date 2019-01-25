@@ -32,7 +32,7 @@
                                       password: password})
                 .then(
                     // Handle success
-                    function (data, status) {
+                    function (data) {
                         var status = data.status
                         var response = data.data
 

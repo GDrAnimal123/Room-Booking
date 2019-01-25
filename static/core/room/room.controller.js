@@ -1,33 +1,53 @@
 (function() {
     'use strict';
 
-    angular.module('app.room', ['app.roomService', 'app.tableService', 'app.roomDirective'])
+    angular.module('app.room', ['app.roomService', 'app.tableTrans', 'app.roomDirective'])
         .constant('ROOM_COMPONENTS', {
+            room: "Breathe",
+            default_time: {
+                hours: 0,
+                minutes: 0,
+            },
             ROOMS: ["Breathe", "Aspire", "Moments", "Connect", "Strategy", "Tactics", "Talents", "Tribute"].sort(),
             TIMEPICKER_OPTIONS: {
                 'timeFormat': 'H:i',
                 'step': 15,
-                // 'forceRoundTime': true,
+                'forceRoundTime': true,
                 'minTime': '06:00',
                 'maxTime': '21:00'
             }
         })
         .controller('RoomController', RoomController);
 
-    RoomController.$inject = ["$scope", "$rootScope", "ROOM_COMPONENTS", "roomService", "tableService"]
+    RoomController.$inject = ["$scope", "$rootScope", 
+                              "ROOM_COMPONENTS", 
+                              "roomService", "tableService", "tableTrans"]
 
-    function RoomController($scope, $rootScope, ROOM_COMPONENTS, roomService, tableService) {
+    function RoomController($scope, $rootScope, 
+                            ROOM_COMPONENTS, 
+                            roomService, tableService, tableTrans) {
 
         var self = this
         this.ROOMS = ROOM_COMPONENTS.ROOMS
-        this.room = roomService.room
+        this.room = ROOM_COMPONENTS.room
 
+        this.init = function() {
+            // console.log("Re init... in room")
+            self.selectedTicket = tableService.selectedTicket
+
+            self.selectedTicket.userID = $rootScope.user.userID;
+            self.selectedTicket.room = roomService.room;
+            self.selectedTicket.title = ""
+            self.selectedTicket.description = ""
+            self.selectedTicket.start = ""
+            self.selectedTicket.end = ""
+        }
+        
         this.selectTicket = function() {
 
             roomService.renderTimePicker()
 
             this.selectedTicket = copy(tableService.selectedTicket)
-            // console.log("tableService.selectedTicket: ", tableService.selectedTicket)
             this.readableDate = new Date(this.selectedTicket.timestamp).printCurrentDate()
             this.readOnly = roomService.isReadonly(this.selectedTicket.userID)
             this.isNewRequest = roomService.isNewRequest(this.selectedTicket.title)
@@ -51,7 +71,7 @@
             this.selectedTicket.start = $('#starttime').timepicker('getTime', "")
             this.selectedTicket.end = $('#endtime').timepicker('getTime', "")
 
-            tableService.saveTicket(this.selectedTicket)
+            tableTrans.saveTicket(this.selectedTicket)
                 .then(function(message) {
                     self.render();
                 });
@@ -59,29 +79,17 @@
 
 
         this.deleteTicket = function() {
-            tableService.deleteTicket(this.selectedTicket)
+            tableTrans.deleteTicket(this.selectedTicket)
                 .then(function(message) {
                     self.render();
                 });
         }
 
         this.render = function() {
-            roomService.room = this.room
+            ROOM_COMPONENTS.room = this.room
 
             this.init();
             $scope.$emit("RefetchTableEvent");
-        }
-
-        this.init = function() {
-            // console.log("Re init... in room")
-            self.selectedTicket = tableService.selectedTicket
-
-            self.selectedTicket.userID = $rootScope.user.userID;
-            self.selectedTicket.room = roomService.room;
-            self.selectedTicket.title = ""
-            self.selectedTicket.description = ""
-            self.selectedTicket.start = ""
-            self.selectedTicket.end = ""
         }
 
         $rootScope.$on("InitializeTicket", function(e) {

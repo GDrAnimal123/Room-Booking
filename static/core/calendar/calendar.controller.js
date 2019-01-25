@@ -3,10 +3,16 @@
 
     angular.module('app.calendar', ["app.calendarService", "app.switchService", "app.calendarDirective"])
         .controller('CalendarController', CalendarController)
+        .constant('CALENDAR_COMPONENTS', {
+            HOURS: [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+            STEPPINGS: [0, 15, 30, 45]
+        })
 
-    CalendarController.$inject = ["$scope", "$rootScope", "calendarService", "switchService"];
+    CalendarController.$inject = ["$scope", "$rootScope", 
+                                  "calendarService", "switchService"];
 
-    function CalendarController($scope, $rootScope, calendarService, switchService) {
+    function CalendarController($scope, $rootScope, 
+                                calendarService, switchService) {
             // Utility
         this.next = function() {
             /**

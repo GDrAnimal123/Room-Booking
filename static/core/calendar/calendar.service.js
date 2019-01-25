@@ -8,11 +8,6 @@
 
         var self = this
 
-        this.DAYS_IN_WEEK = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-        this.MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        this.HOURS = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
-        this.STEPPINGS = [0, 15, 30, 45]
-
         this.calculateDatesInWeek = function(date) {
             /**
              Return a Array of dates in weeks of given date.

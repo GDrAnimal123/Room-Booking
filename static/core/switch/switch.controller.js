@@ -4,9 +4,11 @@
     angular.module('app.switch', ['app.switchService', 'app.switchDirective'])
         .controller('SwitchController', SwitchController);
 
-    SwitchController.$inject = ["$scope", "$rootScope", "switchService"];
+    SwitchController.$inject = ["$scope", "$rootScope", 
+                                "switchService"];
 
-    function SwitchController($scope, $rootScope, switchService) {
+    function SwitchController($scope, $rootScope, 
+                              switchService) {
         var self = this;
         this.selectedVar = switchService.selectedVar
 

@@ -1,12 +1,20 @@
 (function() {
     'use strict';
 
-    angular.module('app.table', ['app.tableService', 'app.calendarService', 'app.roomService', 'app.switchService', "app.tableDirective"])
+    angular.module('app.table', ['app.tableTrans', 'app.calendarService', 'app.roomService', 'app.switchService', "app.tableDirective"])
         .controller('TableController', TableController)
+        .service("tableService", function () {
+            this.disableTimes = [];
+            this.selectedTicket = new Ticket();
+        })
 
-    TableController.$inject = ["$scope", "$rootScope", "$compile", "$interval", "tableService", "calendarService", "roomService", "switchService"]
+    TableController.$inject = ["$scope", "$rootScope", "$compile", "$interval", 
+                               "CALENDAR_COMPONENTS", "ROOM_COMPONENTS", 
+                               "tableService", "tableTrans", "calendarService", "switchService"]
 
-    function TableController($scope, $rootScope, $compile, $interval, tableService, calendarService, roomService, switchService) {
+    function TableController($scope, $rootScope, $compile, $interval, 
+                             CALENDAR_COMPONENTS, ROOM_COMPONENTS, 
+                             tableService, tableTrans, calendarService, switchService) {
 
         var self = this
 
@@ -18,7 +26,6 @@
         var STEP_PIXELS = 30
 
         this.selectCell = function(row, col, step) {
-            // console.log("Select the cell...", row, "---", col, " --", stepping)
             /*
                 Select table cell (only Logic not DOM)
 
@@ -29,7 +36,7 @@
 
             if (typeof this.table != "undefined") {
 
-                roomService.default_time = {
+                ROOM_COMPONENTS.default_time = {
                     hours: this.hours[row],
                     minutes: this.steppings[step]
                 }
@@ -44,6 +51,9 @@
         }
 
         this.showPresentTime = function() {
+            /**
+                Show the Present line (RED LINE)
+            */
 
             var today = new Date()
             var timestamp = today.getTimestamp()
@@ -160,32 +170,28 @@
                 render() will update all data to their latest state
             */
 
-            // Outside $Scope
-            self.room = roomService.room
-            // Variables use to create Table()
-            self.hours = calendarService.HOURS;
-            self.timestamps = calendarService.getTimestampsFromDate(calendarService.currentDate);
-            self.steppings = calendarService.STEPPINGS;
+            // Initialize necessary informations but not $watch 
+            this.room = ROOM_COMPONENTS.room
+            this.hours = CALENDAR_COMPONENTS.HOURS;
+            this.timestamps = calendarService.getTimestampsFromDate(calendarService.currentDate);
+            this.steppings = CALENDAR_COMPONENTS.STEPPINGS;
 
-            // This $Scope
-            self.bookedTickets = Array();
-            self.table = new Table(self.hours, self.timestamps, self.steppings).init(Array());
-            // Display readable dates on DOM
-            self.readableDates = calendarService.convertTimestampsToDates(self.timestamps)
+            tableTrans.getTickets(room, timestamps)
+                .then(function(objects) {
+                    var bookedTickets = convertObjectsToTickets(objects);
+                    self.table = new Table(hours, timestamps, steppings)
+                        .init(bookedTickets);
+                    self.schedule = new Schedule(timestamps).init(bookedTickets);
+                })
 
-            tableService.getTickets(self.room, self.timestamps).then(function(objects) {
-                if (typeof objects != "undefined") {
-                    self.bookedTickets = convertObjectsToTickets(objects);
-                    self.table = new Table(self.hours, self.timestamps, self.steppings)
-                        .init(self.bookedTickets);
-                    self.schedule = new Schedule(self.timestamps).init(self.bookedTickets);
-                }
-            });
+            // Informations to be $watch 
+            self.readableDates = calendarService.convertTimestampsToDates(timestamps)
+            self.table = new Table(hours, timestamps, steppings).init(Array());
+            self.schedule = new Schedule(timestamps).init(Array());
         }
 
         // Refresh table and auto $apply
         $rootScope.$on("RefetchTableEvent", function(e) {
-            // console.log("Refresh")
             self.render();
         })
 

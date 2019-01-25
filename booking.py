@@ -7,13 +7,6 @@ from flask import Flask
 from config import BaseConfig
 from project import user, ticket
 
-'''
-Please also edit host and port in static\core\table\table.service.js 
-if you want to edit this host and port
-
-=> Basically we need to make sure angular client route to the right
-Server url, otherwise we recieve nothing (404 error).
-'''
 host = "127.0.0.1"
 port = "50"
 
