@@ -11,6 +11,7 @@ This application helps user to book room with comfort with interactive interface
 ### Clone this project
 ```git
 git clone https://github.com/GDrAnimal123/Room-Booking.git
+cd Room-Booking
 ```
 ### Execute create_user.py to create default user
 ```python
