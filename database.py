@@ -13,7 +13,7 @@ class UserSQL(object):
         pass
 
     @staticmethod
-    def create_table():
+    def create_table(db):
         # Open database connection
         db = psycopg2.connect(host=HOST, user=USER,
                               password=PASSWD, database=DATABASE, port=PORT)
@@ -22,7 +22,7 @@ class UserSQL(object):
         cursor = db.cursor()
 
         # Drop table if it already exist using execute() method.
-        cursor.execute("DROP TABLE IF EXISTS user")
+        cursor.execute("DROP TABLE IF EXISTS user;")
 
         # Create table as per requirement
         sql = """CREATE TABLE user (
@@ -46,7 +46,7 @@ class UserSQL(object):
         cursor = db.cursor()
 
         # Drop table if it already exist using execute() method.
-        cursor.execute("DROP TABLE IF EXISTS user")
+        cursor.execute("DROP TABLE IF EXISTS user;")
 
         db.close()
 
@@ -58,7 +58,7 @@ class UserSQL(object):
         cursor = db.cursor()
 
         # SQL command
-        sql = """SELECT * FROM user"""
+        sql = """SELECT * FROM user;"""
         users = []
         try:
             # Execute the SQL command
@@ -84,7 +84,7 @@ class UserSQL(object):
 
         # SQL command
         sql = """SELECT * FROM `User` \
-                 WHERE `User`.userID = %(userID)s"""
+                 WHERE `User`.userID = %(userID)s;"""
         params = {"userID": userID}
 
         users = []
@@ -116,7 +116,7 @@ class UserSQL(object):
         sql = """INSERT INTO
             User(userID, password, admin)
                  VALUES
-            (%(userID)s, %(password)s, %(admin)s)"""
+            (%(userID)s, %(password)s, %(admin)s);"""
         params = {"userID": userID, "password": password, "admin": admin}
         try:
             # Execute the SQL command
@@ -142,7 +142,7 @@ class UserSQL(object):
         # SQL command
         sql = """UPDATE User SET `User`.userID = %(userID)s, `User`.password = %(password)s,
                                  `User`.admin = %(admin)s
-                 WHERE `User`.id = %(id)s"""
+                 WHERE `User`.id = %(id)s;"""
         params = {"id": id, "userID": userID, "password": password, "admin": admin}
 
         try:
@@ -165,7 +165,7 @@ class UserSQL(object):
         cursor = db.cursor()
 
         sql = """DELETE FROM User
-                 WHERE `User`.id = %(id)s"""
+                 WHERE `User`.id = %(id)s;"""
         params = {"id": id}
 
         try:
@@ -243,7 +243,7 @@ class TicketSQL(object):
         cursor = db.cursor()
 
         # SQL command
-        sql = """SELECT * FROM Ticket"""
+        sql = """SELECT * FROM Ticket;"""
         tickets = []
         try:
             # Execute the SQL command
@@ -268,7 +268,7 @@ class TicketSQL(object):
 
         # SQL command
         sql = """SELECT * FROM `Ticket` \
-                 WHERE `Ticket`.room = %(room)s AND `Ticket`.timestamp IN %(timestamps)s"""
+                 WHERE `Ticket`.room = %(room)s AND `Ticket`.timestamp IN %(timestamps)s;"""
         params = {'room': room, 'timestamps': tuple(timestamps)}
 
         tickets = []
@@ -299,7 +299,7 @@ class TicketSQL(object):
         sql = """INSERT INTO
             TICKET(userID, room, title, description, start, end, timestamp)
                  VALUES
-            (%(userID)s, %(room)s, %(title)s, %(description)s, %(start)s, %(end)s, %(timestamp)s)"""
+            (%(userID)s, %(room)s, %(title)s, %(description)s, %(start)s, %(end)s, %(timestamp)s);"""
         params = {"userID": userID, "room": room, "title": title, "description": description, "start": start, "end": end, "timestamp": timestamp}
         try:
             # Execute the SQL command
@@ -324,7 +324,7 @@ class TicketSQL(object):
         # SQL command
         sql = """UPDATE Ticket SET `Ticket`.title = %(title)s, `Ticket`.description = %(description)s,
                                    `Ticket`.start = %(start)s, `Ticket`.end = %(end)s
-                 WHERE `Ticket`.id = %(id)s"""
+                 WHERE `Ticket`.id = %(id)s;"""
         params = {"id": id, "title": title, "description": description, "start": start, "end": end}
 
         try:
@@ -347,7 +347,7 @@ class TicketSQL(object):
         cursor = db.cursor()
 
         sql = """DELETE FROM Ticket
-                 WHERE `Ticket`.id = %(id)s"""
+                 WHERE `Ticket`.id = %(id)s;"""
         params = {"id": id}
 
         try:
@@ -371,7 +371,7 @@ class TicketSQL(object):
 
         # SQL command
         sql = """SELECT * FROM `Ticket` \
-                 WHERE `Ticket`.id = %(id)s"""
+                 WHERE `Ticket`.id = %(id)s;"""
         params = {"id": id}
 
         tickets = []
