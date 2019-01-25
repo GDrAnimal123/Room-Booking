@@ -42,6 +42,7 @@
                 }
 
                 tableService.disableTimes = this.schedule[col];
+
                 tableService.selectedTicket = this.table[row][col][step];
                 tableService.selectedTicket.timestamp = this.timestamps[col];
 
@@ -176,18 +177,21 @@
             this.timestamps = calendarService.getTimestampsFromDate(calendarService.currentDate);
             this.steppings = CALENDAR_COMPONENTS.STEPPINGS;
 
-            tableTrans.getTickets(room, timestamps)
-                .then(function(objects) {
-                    var bookedTickets = convertObjectsToTickets(objects);
-                    self.table = new Table(hours, timestamps, steppings)
-                        .init(bookedTickets);
-                    self.schedule = new Schedule(timestamps).init(bookedTickets);
-                })
-
             // Informations to be $watch 
-            self.readableDates = calendarService.convertTimestampsToDates(timestamps)
-            self.table = new Table(hours, timestamps, steppings).init(Array());
-            self.schedule = new Schedule(timestamps).init(Array());
+            self.readableDates = calendarService.convertTimestampsToDates(this.timestamps)
+            self.table = new Table(this.hours, this.timestamps, this.steppings).init(Array());
+            self.schedule = new Schedule(this.timestamps).init(Array());
+
+            tableTrans.getTickets(this.room, this.timestamps)
+                .then(function(objects) {
+                    self.bookedTickets = convertObjectsToTickets(objects);
+                    self.table = new Table(self.hours, self.timestamps, self.steppings)
+                        .init(self.bookedTickets);
+                    self.schedule = new Schedule(self.timestamps).init(self.bookedTickets);
+                })
+                .catch(function(error) {
+                    console.log("Error: ", error);
+                });
         }
 
         // Refresh table and auto $apply

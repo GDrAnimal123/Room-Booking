@@ -83,10 +83,8 @@
                         var response = data.data
                         if (response.status) {
                             user = true;
-                            // console.log("user is true: -- ", user)
                         } else {
                             user = false;
-                            // console.log("user is false: -- ", user)
                         }
                     },
                     function (data) {
@@ -99,22 +97,14 @@
             return $http.get('/api/profile')
                 .then(
                     function (data) {
-                        var response = data.data
-                        return JSON.parse(response["user"])
+                        var response = data.data;
+                        return JSON.parse(response["user"]);
                     },
                     function (data) {
                         console.log("Failed...", data)
                     }
                 );
         };
-
-        // authService.isAuthorized = function(authorizedRoles) {
-        //     if (!angular.isArray(authorizedRoles)) {
-        //         authorizedRoles = [authorizedRoles];
-        //     }
-        //     return (authService.isAuthenticated() &&
-        //         authorizedRoles.indexOf(Session.userRole) !== -1);
-        // };
 
         return authService
     }

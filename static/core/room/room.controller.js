@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('app.room', ['app.roomService', 'app.tableTrans', 'app.roomDirective'])
+    angular.module('app.room', ['app.roomService', 'app.tableTrans', 'app.roomDirective', "AuthService"])
         .constant('ROOM_COMPONENTS', {
             room: "Breathe",
             default_time: {
@@ -21,11 +21,11 @@
 
     RoomController.$inject = ["$scope", "$rootScope", 
                               "ROOM_COMPONENTS", 
-                              "roomService", "tableService", "tableTrans"]
+                              "roomService", "tableService", "tableTrans", "AuthService"]
 
     function RoomController($scope, $rootScope, 
                             ROOM_COMPONENTS, 
-                            roomService, tableService, tableTrans) {
+                            roomService, tableService, tableTrans, AuthService) {
 
         var self = this
         this.ROOMS = ROOM_COMPONENTS.ROOMS
@@ -35,8 +35,11 @@
             // console.log("Re init... in room")
             self.selectedTicket = tableService.selectedTicket
 
-            self.selectedTicket.userID = $rootScope.user.userID;
-            self.selectedTicket.room = roomService.room;
+            AuthService.profile()
+                .then(function(user) {
+                    self.selectedTicket.userID = user.userID
+                })
+            self.selectedTicket.room = ROOM_COMPONENTS.room;
             self.selectedTicket.title = ""
             self.selectedTicket.description = ""
             self.selectedTicket.start = ""

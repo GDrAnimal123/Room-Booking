@@ -10,7 +10,7 @@
                     templateUrl: 'core/home.html',
                     access: {
                         restricted: true
-                    }
+                    },
                 })
                 .when("/login", {
                     templateUrl: 'core/login/loginView.html',
@@ -38,14 +38,14 @@
                 First go to index (restricted is set to True)
                 --> if Auth cannot find any user -> direct to "/login"
             */
-
             AuthService.getUserStatus()
                 .then(function() {
                     if (typeof next.access !== "undefined") {
                         if (next.access.restricted && !AuthService.isLoggedIn()) {
                             $location.path('/login');
                             $route.reload();
-                        } else if (next.access.restricted && AuthService.isLoggedIn()) {
+                        }
+                        else if (next.access.restricted && AuthService.isLoggedIn()) {
                             // call /profile
                             console.log("Getting profile")
                             AuthService.profile()
@@ -58,7 +58,7 @@
                             console.log("Do nothing");
                         }
                     }
-                })
+                });
         });
     })
 
