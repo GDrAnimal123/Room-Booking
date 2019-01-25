@@ -1,5 +1,6 @@
-import pymysql
-pymysql.install_as_MySQLdb()
+import psycopg2
+# import pymysql
+# pymysql.install_as_MySQLdb()
 from project.ticket.models import Ticket
 from project.user.models import User
 
@@ -14,8 +15,8 @@ class UserSQL(object):
     @staticmethod
     def create_table():
         # Open database connection
-        db = pymysql.connect(host=HOST, user=USER,
-                             passwd=PASSWD, db=DATABASE)
+        db = psycopg2.connect(host=HOST, user=USER,
+                              passwd=PASSWD, db=DATABASE, port=PORT)
 
         # prepare a cursor object using cursor() method
         cursor = db.cursor()
@@ -38,8 +39,8 @@ class UserSQL(object):
     @staticmethod
     def drop_table():
         # Open database connection
-        db = pymysql.connect(host=HOST, user=USER,
-                             passwd=PASSWD, db=DATABASE)
+        db = psycopg2.connect(host=HOST, user=USER,
+                              passwd=PASSWD, db=DATABASE)
 
         # prepare a cursor object using cursor() method
         cursor = db.cursor()
@@ -52,8 +53,8 @@ class UserSQL(object):
     @staticmethod
     def selectAll():
         # Connect to database
-        db = pymysql.connect(host=HOST, user=USER,
-                             passwd=PASSWD, db=DATABASE)
+        db = psycopg2.connect(host=HOST, user=USER,
+                              passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         # SQL command
@@ -77,8 +78,8 @@ class UserSQL(object):
     def selectByUserID(userID):
 
         # Connect to database
-        db = pymysql.connect(host=HOST, user=USER,
-                             passwd=PASSWD, db=DATABASE)
+        db = psycopg2.connect(host=HOST, user=USER,
+                              passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         # SQL command
@@ -107,8 +108,8 @@ class UserSQL(object):
         id, userID, password, admin = object.id, object.userID, object.password, object.admin
 
         # Connect to database
-        db = pymysql.connect(host=HOST, user=USER,
-                             passwd=PASSWD, db=DATABASE)
+        db = psycopg2.connect(host=HOST, user=USER,
+                              passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         # SQL command
@@ -134,8 +135,8 @@ class UserSQL(object):
         id, userID, password, admin = object.id, object.userID, object.password, object.admin
 
         # Connect to database
-        db = pymysql.connect(host=HOST, user=USER,
-                             passwd=PASSWD, db=DATABASE)
+        db = psycopg2.connect(host=HOST, user=USER,
+                              passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         # SQL command
@@ -159,8 +160,8 @@ class UserSQL(object):
     def delete(object):
         id = object.id
         # Connect to database
-        db = pymysql.connect(host=HOST, user=USER,
-                             passwd=PASSWD, db=DATABASE)
+        db = psycopg2.connect(host=HOST, user=USER,
+                              passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         sql = """DELETE FROM User
@@ -195,8 +196,8 @@ class TicketSQL(object):
     @staticmethod
     def create_table():
         # Open database connection
-        db = pymysql.connect(host=HOST, user=USER,
-                             passwd=PASSWD, db=DATABASE)
+        db = psycopg2.connect(host=HOST, user=USER,
+                              passwd=PASSWD, db=DATABASE)
 
         # prepare a cursor object using cursor() method
         cursor = db.cursor()
@@ -223,8 +224,8 @@ class TicketSQL(object):
     @staticmethod
     def drop_table():
         # Open database connection
-        db = pymysql.connect(host=HOST, user=USER,
-                             passwd=PASSWD, db=DATABASE)
+        db = psycopg2.connect(host=HOST, user=USER,
+                              passwd=PASSWD, db=DATABASE)
 
         # prepare a cursor object using cursor() method
         cursor = db.cursor()
@@ -237,8 +238,8 @@ class TicketSQL(object):
     @staticmethod
     def selectAll():
         # Connect to database
-        db = pymysql.connect(host=HOST, user=USER,
-                             passwd=PASSWD, db=DATABASE)
+        db = psycopg2.connect(host=HOST, user=USER,
+                              passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         # SQL command
@@ -261,8 +262,8 @@ class TicketSQL(object):
     @staticmethod
     def selectByRoomAndTimestamps(room, timestamps):
         # Connect to database
-        db = pymysql.connect(host=HOST, user=USER,
-                             passwd=PASSWD, db=DATABASE)
+        db = psycopg2.connect(host=HOST, user=USER,
+                              passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         # SQL command
@@ -290,8 +291,8 @@ class TicketSQL(object):
         userID, room, title, description, start, end, timestamp = object.userID, object.room, object.title, object.description, object.start, object.end, object.timestamp
 
         # Connect to database
-        db = pymysql.connect(host=HOST, user=USER,
-                             passwd=PASSWD, db=DATABASE)
+        db = psycopg2.connect(host=HOST, user=USER,
+                              passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         # SQL command
@@ -317,8 +318,8 @@ class TicketSQL(object):
         id, title, description, start, end = object.id, object.title, object.description, object.start, object.end
 
         # Connect to database
-        db = pymysql.connect(host=HOST, user=USER,
-                             passwd=PASSWD, db=DATABASE)
+        db = psycopg2.connect(host=HOST, user=USER,
+                              passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         # SQL command
@@ -343,8 +344,8 @@ class TicketSQL(object):
         # userID, room, title, description, start, end, timestamp = object.userID, object.room, object.title, object.description, object.start, object.end, object.timestamp
         id = object.id
         # Connect to database
-        db = pymysql.connect(host=HOST, user=USER,
-                             passwd=PASSWD, db=DATABASE)
+        db = psycopg2.connect(host=HOST, user=USER,
+                              passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         sql = """DELETE FROM Ticket
@@ -367,8 +368,8 @@ class TicketSQL(object):
         id = object.id
 
         # Connect to database
-        db = pymysql.connect(host=HOST, user=USER,
-                             passwd=PASSWD, db=DATABASE)
+        db = psycopg2.connect(host=HOST, user=USER,
+                              passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         # SQL command

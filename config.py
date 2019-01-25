@@ -1,9 +1,10 @@
 # project/config.py
 
-HOST = "127.0.0.1"
-USER = "root"
-PASSWD = "Password1"
-DATABASE = "booking"
+HOST = "ec2-54-235-67-106.compute-1.amazonaws.com"
+USER = "mihsixtueqwsks"
+PASSWD = "8b5f898789f8ab6632feea8da03a50352874e5ad63b9c2544c428bf68a0653e5"
+DATABASE = "dbr8a90nqd6sff"
+PORT = 5432
 
 
 class BaseConfig(object):
