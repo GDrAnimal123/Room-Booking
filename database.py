@@ -13,7 +13,7 @@ class UserSQL(object):
         pass
 
     @staticmethod
-    def create_table(db):
+    def create_table():
         # Open database connection
         db = psycopg2.connect(host=HOST, user=USER,
                               password=PASSWD, database=DATABASE, port=PORT)
