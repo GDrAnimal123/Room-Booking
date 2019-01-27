@@ -1,8 +1,5 @@
-import pymysql
-pymysql.install_as_MySQLdb()
-
-from models.Ticket import Ticket
-from sql_extensions import TicketSQL
+from project.ticket.models import Ticket
+from database import TicketSQL
 
 TicketSQL.create_table()
 

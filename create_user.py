@@ -1,6 +1,3 @@
-import sys
-sys.path.append("..")
-
 from project.user.models import User
 from database import UserSQL
 
