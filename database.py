@@ -1,6 +1,5 @@
-import psycopg2
-# import pymysql
-# pymysql.install_as_MySQLdb()
+import pymysql
+pymysql.install_as_MySQLdb()
 from project.ticket.models import Ticket
 from project.user.models import User
 
@@ -15,14 +14,14 @@ class UserSQL(object):
     @staticmethod
     def create_table():
         # Open database connection
-        db = psycopg2.connect(host=HOST, user=USER,
-                              password=PASSWD, database=DATABASE, port=PORT)
+        db = pymysql.connect(host=HOST, user=USER,
+                             passwd=PASSWD, db=DATABASE)
 
         # prepare a cursor object using cursor() method
         cursor = db.cursor()
 
         # Drop table if it already exist using execute() method.
-        cursor.execute("DROP TABLE IF EXISTS user;")
+        cursor.execute("DROP TABLE IF EXISTS user")
 
         # Create table as per requirement
         sql = """CREATE TABLE user (
@@ -39,26 +38,26 @@ class UserSQL(object):
     @staticmethod
     def drop_table():
         # Open database connection
-        db = psycopg2.connect(host=HOST, user=USER,
-                              password=PASSWD, database=DATABASE, port=PORT)
+        db = pymysql.connect(host=HOST, user=USER,
+                             passwd=PASSWD, db=DATABASE)
 
         # prepare a cursor object using cursor() method
         cursor = db.cursor()
 
         # Drop table if it already exist using execute() method.
-        cursor.execute("DROP TABLE IF EXISTS user;")
+        cursor.execute("DROP TABLE IF EXISTS user")
 
         db.close()
 
     @staticmethod
     def selectAll():
         # Connect to database
-        db = psycopg2.connect(host=HOST, user=USER,
-                              password=PASSWD, database=DATABASE, port=PORT)
+        db = pymysql.connect(host=HOST, user=USER,
+                             passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         # SQL command
-        sql = """SELECT * FROM user;"""
+        sql = """SELECT * FROM user"""
         users = []
         try:
             # Execute the SQL command
@@ -78,13 +77,13 @@ class UserSQL(object):
     def selectByUserID(userID):
 
         # Connect to database
-        db = psycopg2.connect(host=HOST, user=USER,
-                              password=PASSWD, database=DATABASE, port=PORT)
+        db = pymysql.connect(host=HOST, user=USER,
+                             passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         # SQL command
         sql = """SELECT * FROM `User` \
-                 WHERE `User`.userID = %(userID)s;"""
+                 WHERE `User`.userID = %(userID)s"""
         params = {"userID": userID}
 
         users = []
@@ -108,15 +107,15 @@ class UserSQL(object):
         id, userID, password, admin = object.id, object.userID, object.password, object.admin
 
         # Connect to database
-        db = psycopg2.connect(host=HOST, user=USER,
-                              password=PASSWD, database=DATABASE, port=PORT)
+        db = pymysql.connect(host=HOST, user=USER,
+                             passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         # SQL command
         sql = """INSERT INTO
             User(userID, password, admin)
                  VALUES
-            (%(userID)s, %(password)s, %(admin)s);"""
+            (%(userID)s, %(password)s, %(admin)s)"""
         params = {"userID": userID, "password": password, "admin": admin}
         try:
             # Execute the SQL command
@@ -135,14 +134,14 @@ class UserSQL(object):
         id, userID, password, admin = object.id, object.userID, object.password, object.admin
 
         # Connect to database
-        db = psycopg2.connect(host=HOST, user=USER,
-                              password=PASSWD, database=DATABASE, port=PORT)
+        db = pymysql.connect(host=HOST, user=USER,
+                             passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         # SQL command
         sql = """UPDATE User SET `User`.userID = %(userID)s, `User`.password = %(password)s,
                                  `User`.admin = %(admin)s
-                 WHERE `User`.id = %(id)s;"""
+                 WHERE `User`.id = %(id)s"""
         params = {"id": id, "userID": userID, "password": password, "admin": admin}
 
         try:
@@ -160,12 +159,12 @@ class UserSQL(object):
     def delete(object):
         id = object.id
         # Connect to database
-        db = psycopg2.connect(host=HOST, user=USER,
-                              password=PASSWD, database=DATABASE, port=PORT)
+        db = pymysql.connect(host=HOST, user=USER,
+                             passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         sql = """DELETE FROM User
-                 WHERE `User`.id = %(id)s;"""
+                 WHERE `User`.id = %(id)s"""
         params = {"id": id}
 
         try:
@@ -196,8 +195,8 @@ class TicketSQL(object):
     @staticmethod
     def create_table():
         # Open database connection
-        db = psycopg2.connect(host=HOST, user=USER,
-                              password=PASSWD, database=DATABASE, port=PORT)
+        db = pymysql.connect(host=HOST, user=USER,
+                             passwd=PASSWD, db=DATABASE)
 
         # prepare a cursor object using cursor() method
         cursor = db.cursor()
@@ -224,8 +223,8 @@ class TicketSQL(object):
     @staticmethod
     def drop_table():
         # Open database connection
-        db = psycopg2.connect(host=HOST, user=USER,
-                              password=PASSWD, database=DATABASE, port=PORT)
+        db = pymysql.connect(host=HOST, user=USER,
+                             passwd=PASSWD, db=DATABASE)
 
         # prepare a cursor object using cursor() method
         cursor = db.cursor()
@@ -238,12 +237,12 @@ class TicketSQL(object):
     @staticmethod
     def selectAll():
         # Connect to database
-        db = psycopg2.connect(host=HOST, user=USER,
-                              password=PASSWD, database=DATABASE, port=PORT)
+        db = pymysql.connect(host=HOST, user=USER,
+                             passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         # SQL command
-        sql = """SELECT * FROM Ticket;"""
+        sql = """SELECT * FROM Ticket"""
         tickets = []
         try:
             # Execute the SQL command
@@ -262,13 +261,13 @@ class TicketSQL(object):
     @staticmethod
     def selectByRoomAndTimestamps(room, timestamps):
         # Connect to database
-        db = psycopg2.connect(host=HOST, user=USER,
-                              password=PASSWD, database=DATABASE, port=PORT)
+        db = pymysql.connect(host=HOST, user=USER,
+                             passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         # SQL command
         sql = """SELECT * FROM `Ticket` \
-                 WHERE `Ticket`.room = %(room)s AND `Ticket`.timestamp IN %(timestamps)s;"""
+                 WHERE `Ticket`.room = %(room)s AND `Ticket`.timestamp IN %(timestamps)s"""
         params = {'room': room, 'timestamps': tuple(timestamps)}
 
         tickets = []
@@ -291,15 +290,15 @@ class TicketSQL(object):
         userID, room, title, description, start, end, timestamp = object.userID, object.room, object.title, object.description, object.start, object.end, object.timestamp
 
         # Connect to database
-        db = psycopg2.connect(host=HOST, user=USER,
-                              password=PASSWD, database=DATABASE, port=PORT)
+        db = pymysql.connect(host=HOST, user=USER,
+                             passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         # SQL command
         sql = """INSERT INTO
             TICKET(userID, room, title, description, start, end, timestamp)
                  VALUES
-            (%(userID)s, %(room)s, %(title)s, %(description)s, %(start)s, %(end)s, %(timestamp)s);"""
+            (%(userID)s, %(room)s, %(title)s, %(description)s, %(start)s, %(end)s, %(timestamp)s)"""
         params = {"userID": userID, "room": room, "title": title, "description": description, "start": start, "end": end, "timestamp": timestamp}
         try:
             # Execute the SQL command
@@ -318,13 +317,14 @@ class TicketSQL(object):
         id, title, description, start, end = object.id, object.title, object.description, object.start, object.end
 
         # Connect to database
-        db = psycopg2.connect(host=HOST, user=USER, password=PASSWD, database=DATABASE, port=PORT)
+        db = pymysql.connect(host=HOST, user=USER,
+                             passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         # SQL command
         sql = """UPDATE Ticket SET `Ticket`.title = %(title)s, `Ticket`.description = %(description)s,
                                    `Ticket`.start = %(start)s, `Ticket`.end = %(end)s
-                 WHERE `Ticket`.id = %(id)s;"""
+                 WHERE `Ticket`.id = %(id)s"""
         params = {"id": id, "title": title, "description": description, "start": start, "end": end}
 
         try:
@@ -343,11 +343,12 @@ class TicketSQL(object):
         # userID, room, title, description, start, end, timestamp = object.userID, object.room, object.title, object.description, object.start, object.end, object.timestamp
         id = object.id
         # Connect to database
-        db = psycopg2.connect(host=HOST, user=USER, password=PASSWD, database=DATABASE, port=PORT)
+        db = pymysql.connect(host=HOST, user=USER,
+                             passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         sql = """DELETE FROM Ticket
-                 WHERE `Ticket`.id = %(id)s;"""
+                 WHERE `Ticket`.id = %(id)s"""
         params = {"id": id}
 
         try:
@@ -366,12 +367,13 @@ class TicketSQL(object):
         id = object.id
 
         # Connect to database
-        db = psycopg2.connect(host=HOST, user=USER, password=PASSWD, database=DATABASE, port=PORT)
+        db = pymysql.connect(host=HOST, user=USER,
+                             passwd=PASSWD, db=DATABASE)
         cursor = db.cursor()
 
         # SQL command
         sql = """SELECT * FROM `Ticket` \
-                 WHERE `Ticket`.id = %(id)s;"""
+                 WHERE `Ticket`.id = %(id)s"""
         params = {"id": id}
 
         tickets = []
