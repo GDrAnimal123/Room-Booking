@@ -82,7 +82,7 @@
             }
         }
 
-        this.renderBookedTickets = function() {
+        this.showBookedTickets = function() {
             /**
                 Render Overlays on DOM
             */

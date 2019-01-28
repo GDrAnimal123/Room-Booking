@@ -33,11 +33,8 @@
         this.room = ROOM_COMPONENTS.room
 
         this.init = function() {
-            // console.log("Re init... in room")
-            self.selectedTicket = tableService.selectedTicket
-
-            console.log("Init called")
             try {
+                self.selectedTicket = tableService.selectedTicket
                 self.selectedTicket.userID = $rootScope.user.userID
                 self.selectedTicket.room = ROOM_COMPONENTS.room;
                 self.selectedTicket.title = ""
@@ -45,11 +42,15 @@
                 self.selectedTicket.start = ""
                 self.selectedTicket.end = ""
             } catch (error){
-                console.log(error)
+                // console.log(error)
             }
         }
 
         this.selectTicket = function() {
+            /*
+                This function is called whenever user select any timeslots on SCHEDULE table and
+                update our $scope
+            */
 
             roomService.renderTimePicker()
 

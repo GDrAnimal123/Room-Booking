@@ -111,7 +111,7 @@
             $http.get('/api/profile')
                 .then(
                     function(data) {
-                        console.log("Retrieve")
+                        // console.log("Retrieve")
                         var response = data.data;
                         $rootScope.user = JSON.parse(response["user"]);
                     },
