@@ -20,13 +20,13 @@
             // call login from service
             AuthService.login(this.loginForm.userID, this.loginForm.password)
                 .then(function() {
-                    console.log("Proceed to main page")
+                    // console.log("Proceed to main page")
                     $location.path('/');
                     self.disabled = false;
                     self.loginForm = {};
                 })
                 .catch(function() {
-                    console.log("Catch error")
+                    // console.log("Catch error")
                     self.error = true;
                     self.errorMessage = "Invalid userID and/or password";
                     self.disabled = false;

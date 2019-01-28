@@ -35,15 +35,17 @@
             // console.log("Re init... in room")
             self.selectedTicket = tableService.selectedTicket
 
-            if ($rootScope.user == null) {
-                AuthService.profile()
-                .then(function(user) {
-                    console.log("Profile is called!! ..")
-                    self.selectedTicket.userID = user.userID
-                })    
-            } else {
+            console.log("Init called")
+
+            // if ($rootScope.user == null) {
+            //     AuthService.profile()
+            //     .then(function(user) {
+            //         console.log("Profile is called!! ..")
+            //         self.selectedTicket.userID = user.userID
+            //     })    
+            // } else {
                 self.selectedTicket.userID = $rootScope.user.userID
-            }
+            // }
             self.selectedTicket.room = ROOM_COMPONENTS.room;
             self.selectedTicket.title = ""
             self.selectedTicket.description = ""

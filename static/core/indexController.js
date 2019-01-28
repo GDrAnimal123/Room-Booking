@@ -12,9 +12,9 @@
                         restricted: true
                     },
                     resolve: {
-                        auth: function($rootScope) {
-                            console.log("Auth is called..");
+                        auth: function($rootScope, AuthService) {
                             $rootScope.user = null;
+                            AuthService.profile();
                         }
                     }
                 })
@@ -44,6 +44,17 @@
                 First go to index (restricted is set to True)
                 --> if Auth cannot find any user -> direct to "/login"
             */
+
+            // async function getProfile() {
+            //     try {
+            //         const user = await AuthService.profile();
+            //         console.log("Await", user);
+            //         $rootScope.user = await user;
+            //         console.log("$rootScope.user 123", $rootScope.user);
+            //     } catch (err) {
+            //         console.log('fetch failed', err);
+            //     }
+            // }
             AuthService.getUserStatus()
                 .then(function() {
                     if (typeof next.access !== "undefined") {
@@ -52,14 +63,12 @@
                             $route.reload();
                         }
                         else if (next.access.restricted && AuthService.isLoggedIn()) {
-                            // call /profile
-                            AuthService.profile()
-                                .then(function(user) {
-                                    $rootScope.user = user;
+                            
+                            // AuthService.profile()
+                            //     .then(function() {
+                            //         console.log("HELLOW: ", $rootScope.user);
 
-                                })
-                        } else {
-                            console.log("Do nothing");
+                            //     })
                         }
                     }
                 });

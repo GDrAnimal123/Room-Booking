@@ -4,9 +4,9 @@
     angular.module('AuthService', [])
         .factory('AuthService', AuthService);
 
-    AuthService.$inject = ["$q", "$http"];
+    AuthService.$inject = ["$q", "$http", "$timeout", "$rootScope"];
 
-    function AuthService($q, $http) {
+    function AuthService($q, $http, $timeout, $rootScope) {
 
         /*
 			Logic related to authentication and authorization (access control)
@@ -94,13 +94,16 @@
         };
 
         authService.profile = function() {
+            console.log("Profile is called...123123")
             return $http.get('/api/profile')
                 .then(
                     function (data) {
+                        console.log("Retrieve")
                         var response = data.data;
-                        return JSON.parse(response["user"]);
+                        $rootScope.user = JSON.parse(response["user"]);
                     },
                     function (data) {
+                        $rootScope.user = null
                         console.log("Failed...", data)
                     }
                 );
