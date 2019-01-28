@@ -58,3 +58,7 @@ function timeStringToInteger(timeString) {
 function copy(object) {
     return JSON.parse(JSON.stringify(object));
 }
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

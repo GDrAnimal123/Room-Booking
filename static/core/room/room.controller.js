@@ -19,13 +19,14 @@
         })
         .controller('RoomController', RoomController);
 
-    RoomController.$inject = ["$scope", "$rootScope", 
-                              "ROOM_COMPONENTS", 
-                              "roomService", "tableService", "tableTrans", "AuthService"]
+    RoomController.$inject = ["$scope", "$rootScope",
+        "ROOM_COMPONENTS",
+        "roomService", "tableService", "tableTrans", "AuthService"
+    ]
 
-    function RoomController($scope, $rootScope, 
-                            ROOM_COMPONENTS, 
-                            roomService, tableService, tableTrans, AuthService) {
+    function RoomController($scope, $rootScope,
+        ROOM_COMPONENTS,
+        roomService, tableService, tableTrans, AuthService) {
 
         var self = this
         this.ROOMS = ROOM_COMPONENTS.ROOMS
@@ -36,23 +37,18 @@
             self.selectedTicket = tableService.selectedTicket
 
             console.log("Init called")
-
-            // if ($rootScope.user == null) {
-            //     AuthService.profile()
-            //     .then(function(user) {
-            //         console.log("Profile is called!! ..")
-            //         self.selectedTicket.userID = user.userID
-            //     })    
-            // } else {
+            try {
                 self.selectedTicket.userID = $rootScope.user.userID
-            // }
-            self.selectedTicket.room = ROOM_COMPONENTS.room;
-            self.selectedTicket.title = ""
-            self.selectedTicket.description = ""
-            self.selectedTicket.start = ""
-            self.selectedTicket.end = ""
+                self.selectedTicket.room = ROOM_COMPONENTS.room;
+                self.selectedTicket.title = ""
+                self.selectedTicket.description = ""
+                self.selectedTicket.start = ""
+                self.selectedTicket.end = ""
+            } catch (error){
+                console.log(error)
+            }
         }
-        
+
         this.selectTicket = function() {
 
             roomService.renderTimePicker()
@@ -103,7 +99,6 @@
         }
 
         $rootScope.$on("InitializeTicket", function(e) {
-            // console.log("InitializeTicket 1231231");
             self.init();
         })
 

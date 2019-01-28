@@ -13,7 +13,6 @@
     	*/
         var authService = {};
         var user = null;
-        var credentials = {};
 
         authService.isLoggedIn = function() {
             if (user) {
@@ -24,15 +23,22 @@
         };
 
         authService.login = function(userID, password) {
+            /*
+                Compare given credentials with Database
+                then push user into Session stack.
+            */
+
             // create a new instance of deferred
             var deferred = $q.defer();
 
             // send a post request to the server
-            $http.post('/api/login', {userID: userID,
-                                      password: password})
+            $http.post('/api/login', {
+                    userID: userID,
+                    password: password
+                })
                 .then(
                     // Handle success
-                    function (data) {
+                    function(data) {
                         var status = data.status
                         var response = data.data
 
@@ -45,28 +51,30 @@
                         }
                     },
                     // Handle error
-                    function (data) {
+                    function(data) {
                         user = false;
                         deferred.reject();
                     }
                 );
 
-                // return promise object
-                return deferred.promise;
+            // return promise object
+            return deferred.promise;
         }
 
         authService.logout = function(userID, password) {
-            // create a new instance of deferred
+            /*
+                Remove user from Session stack.
+            */
             var deferred = $q.defer();
 
             // send a post request to the server
             $http.get('/api/logout')
                 .then(
-                    function (data) {
+                    function(data) {
                         user = false;
                         deferred.resolve();
                     },
-                    function (data) {
+                    function(data) {
                         user = false;
                         deferred.reject();
                     }
@@ -77,9 +85,12 @@
         }
 
         authService.getUserStatus = function() {
+            /*
+                GET if any user has logged in (Remains in Session).
+            */
             return $http.get('/api/status')
                 .then(
-                    function (data) {
+                    function(data) {
                         var response = data.data
                         if (response.status) {
                             user = true;
@@ -87,22 +98,24 @@
                             user = false;
                         }
                     },
-                    function (data) {
+                    function(data) {
                         console.log("user is false: -- ", user)
                     }
                 );
         };
 
         authService.profile = function() {
-            console.log("Profile is called...123123")
-            return $http.get('/api/profile')
+            /*
+                GET user profile (userID, password, admin) by SESSION ID
+            */
+            $http.get('/api/profile')
                 .then(
-                    function (data) {
+                    function(data) {
                         console.log("Retrieve")
                         var response = data.data;
                         $rootScope.user = JSON.parse(response["user"]);
                     },
-                    function (data) {
+                    function(data) {
                         $rootScope.user = null
                         console.log("Failed...", data)
                     }
