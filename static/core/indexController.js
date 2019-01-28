@@ -11,6 +11,12 @@
                     access: {
                         restricted: true
                     },
+                    resolve: {
+                        auth: function($rootScope) {
+                            console.log("Auth is called..");
+                            $rootScope.user = null;
+                        }
+                    }
                 })
                 .when("/login", {
                     templateUrl: 'core/login/loginView.html',
@@ -47,10 +53,8 @@
                         }
                         else if (next.access.restricted && AuthService.isLoggedIn()) {
                             // call /profile
-                            console.log("Getting profile")
                             AuthService.profile()
                                 .then(function(user) {
-                                    console.log("Response: ", user)
                                     $rootScope.user = user;
 
                                 })
