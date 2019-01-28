@@ -15,4 +15,4 @@ print("Ticket 1: ", test_ticket1)
 print("Ticket 2: ", test_ticket2)
 print("Ticket 3: ", test_ticket3)
 
-TicketSQL.drop_table()
+# TicketSQL.drop_table()
