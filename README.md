@@ -22,6 +22,6 @@ python create_user.py
 python booking.py
 ```
 
-## DEMO
-I have deployed my application on Heroku with MySQL database linked.
-[link](https://marriott-booking.herokuapp.com/)
+## Demo
+I have deployed my [application](https://marriott-booking.herokuapp.com/) on Heroku with MySQL database linked.
+
