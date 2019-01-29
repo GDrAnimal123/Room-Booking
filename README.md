@@ -23,5 +23,5 @@ python booking.py
 ```
 
 ## Demo
-I have deployed my [application](https://marriott-booking.herokuapp.com/) on Heroku with MySQL database linked.
+I have deployed my application on Heroku with MySQL database linked ([https://marriott-booking.herokuapp.com/](https://marriott-booking.herokuapp.com/)).
 
